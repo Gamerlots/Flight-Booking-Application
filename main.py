@@ -3,7 +3,7 @@ import os
 from flask import *
 import pymongo
 
-uri = os.environ["URI"]
+uri = "mongodb+srv://aarinDave:DBEfHhdueTi2N7q7@mongodb.6iicfiw.mongodb.net/?retryWrites=true&w=majority"
 client = pymongo.MongoClient(uri, tls=True, tlsAllowInvalidCertificates=True)
 database = client["flight-booking-application"]
 

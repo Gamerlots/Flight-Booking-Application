@@ -11,6 +11,7 @@ class MyBookings extends StatefulWidget {
 }
 
 class _MyBookingsState extends State<MyBookings> {
+  bool isLoading = true;
   List<dynamic>? bookings;
 
   Future<String> getBookings() async {
@@ -38,29 +39,38 @@ class _MyBookingsState extends State<MyBookings> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    isLoading = true;
     getBookings().then(
       (response) => {
         if (response != 'USER_DOES_NOT_EXIST') {
           setState(() {
             bookings = jsonDecode(response);
+            isLoading = false;
           })
         }
       }
     );
+  }
 
-    List<BookingCard> bookingCards = [];
-    for (int index = 0; index < bookings!.length; index++) {
-      bookingCards.add(
-        BookingCard(flightInformation: bookings![index])
-      );
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> bookingCards = [];
+    if (!isLoading) {
+      for (int index = 0; index < bookings!.length; index++) {
+        bookingCards.add(
+            BookingCard(flightInformation: bookings![index])
+        );
+      }
+    } else {
+      bookingCards.add(const CircularProgressIndicator());
     }
 
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: Column(
-          children: <Widget>[
+      child: Column(
+        children: <Widget>[
             const Text(
               'My Bookings',
               style: TextStyle(

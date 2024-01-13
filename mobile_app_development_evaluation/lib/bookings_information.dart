@@ -79,128 +79,128 @@ class _BookingsInformationState extends State<BookingsInformation> {
       body: Center(
         child: Form(
           key: _formKey,
-          child: Column(
-            children: [
-              const Padding(padding: EdgeInsets.all(8.0)),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: departureDateController,
-                      decoration: const InputDecoration(
-                        labelText: 'Departure date',
-                        filled: true,
-                        prefixIcon: Icon(Icons.calendar_today),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const Padding(padding: EdgeInsets.all(8.0)),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: departureDateController,
+                        decoration: const InputDecoration(
+                          labelText: 'Departure date',
+                          filled: true,
+                          prefixIcon: Icon(Icons.calendar_today),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blue)
+                          ),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue)
-                        ),
-                      ),
-                      readOnly: true,
-                      onTap: () {
-                        _selectDate(departureDateController);
-                      },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please select a date.';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: TextFormField(
-                      controller: returnDateController,
-                      decoration: const InputDecoration(
-                        labelText: 'Return date',
-                        filled: true,
-                        prefixIcon: Icon(Icons.calendar_today),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue)
-                        ),
-                      ),
-                      readOnly: true,
-                      onTap: () {
-                        _selectDate(returnDateController);
-                      },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please select a date.';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              SingleChildScrollView(
-                child: Column(
-                  children: passengerInputs
-                )
-              ),
-              ElevatedButton.icon(
-                onPressed: () {
-                  setState(() {
-                    passengerInputs.add(
-                      PassengerInput(index: passengerInputs.length + 1)
-                    );
-                    // numberOfPassengers++;
-                  });
-                },
-                style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.blue),
-                  foregroundColor: MaterialStatePropertyAll(Colors.white),
-                  padding: MaterialStatePropertyAll(
-                    EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: 25.0
-                    )
-                  )
-                ),
-                icon: const Icon(Icons.person_add_alt_1),
-                label: const Text('Add Passenger')
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      addBooking().then(
-                        (response) => {
-                          if (response == 'SUCCESS') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (BuildContext context) => const Congratulations()
-                              )
-                            )
-                          } else {
-                            print('The booking did not upload...')
+                        readOnly: true,
+                        onTap: () {
+                          _selectDate(departureDateController);
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please select a date.';
                           }
-                        }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: TextFormField(
+                        controller: returnDateController,
+                        decoration: const InputDecoration(
+                          labelText: 'Return date',
+                          filled: true,
+                          prefixIcon: Icon(Icons.calendar_today),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blue)
+                          ),
+                        ),
+                        readOnly: true,
+                        onTap: () {
+                          _selectDate(returnDateController);
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please select a date.';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: passengerInputs
+                ),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    setState(() {
+                      passengerInputs.add(
+                        PassengerInput(index: passengerInputs.length + 1)
                       );
-                    }
+                      // numberOfPassengers++;
+                    });
                   },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.greenAccent[400]),
-                    foregroundColor: const MaterialStatePropertyAll(Colors.white),
-                    padding: const MaterialStatePropertyAll(
+                  style: const ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                    foregroundColor: MaterialStatePropertyAll(Colors.white),
+                    padding: MaterialStatePropertyAll(
                       EdgeInsets.symmetric(
                         vertical: 10.0,
                         horizontal: 25.0
                       )
                     )
                   ),
-                  icon: const Icon(Icons.check),
-                  label: const Text('Finish Booking')
+                  icon: const Icon(Icons.person_add_alt_1),
+                  label: const Text('Add Passenger')
                 ),
-              )
-            ]
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        addBooking().then(
+                          (response) => {
+                            if (response == 'SUCCESS') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) => const Congratulations()
+                                )
+                              )
+                            } else {
+                              print('The booking did not upload...')
+                            }
+                          }
+                        );
+                      }
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(Colors.greenAccent[400]),
+                      foregroundColor: const MaterialStatePropertyAll(Colors.white),
+                      padding: const MaterialStatePropertyAll(
+                        EdgeInsets.symmetric(
+                          vertical: 10.0,
+                          horizontal: 25.0
+                        )
+                      )
+                    ),
+                    icon: const Icon(Icons.check),
+                    label: const Text('Finish Booking')
+                  ),
+                )
+              ]
+            ),
           ),
         )
       )

@@ -138,6 +138,8 @@ class _FlightsListState extends State<FlightsList> {
     {'name': 'U7 689', 'start': 'CLE', 'end': 'MCO', 'duration': '4h 52m'},
     {'name': '1B 031', 'start': 'DFW', 'end': 'IAD', 'duration': '1h 38m'},
     {'name': '4K 725', 'start': 'CVG', 'end': 'DCA', 'duration': '2h 25m'},
+    {'name': '4K 725', 'start': 'CVG', 'end': 'DCA', 'duration': '2h 25m'},
+    {'name': '4K 725', 'start': 'CVG', 'end': 'DCA', 'duration': '2h 25m'},
   ];
 
   @override
