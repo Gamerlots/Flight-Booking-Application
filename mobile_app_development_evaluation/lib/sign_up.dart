@@ -162,14 +162,36 @@ class _SignUpState extends State<SignUp> {
                     // Creates a new user document with their email
                     // and password.
                     createUser(email.text, password.text).then(
-                      (response) => response == 'SUCCESS'
-                        ? Navigator.push(
+                      (response) => {
+                        if (response == 'SUCCESS') {
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (BuildContext context) => const MainPage()
                             )
                           )
-                        : print('The user exists.')
+                        } else if (response == 'USER_DOES_EXIST') {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 4.0
+                                    ),
+                                    child: Icon(
+                                      Icons.warning_amber_rounded,
+                                      color: Colors.white
+                                    ),
+                                  ),
+                                  Text('The email is already registered.'),
+                                ]
+                              ),
+                              backgroundColor: Colors.redAccent,
+                            )
+                          )
+                        }
+                      }
                     );
                   }
                 },

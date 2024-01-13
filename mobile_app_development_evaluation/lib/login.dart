@@ -124,8 +124,8 @@ class _LoginState extends State<Login> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    // Creates a new user document with their email
-                    // and password.
+                    // Creates a new user document with their email and
+                    // password.
                     verifyUser(email.text, password.text).then(
                       (response) => {
                         if (response == 'SUCCESS') {
@@ -135,8 +135,46 @@ class _LoginState extends State<Login> {
                               builder: (BuildContext context) => const MainPage()
                             )
                           )
-                        } else if (true) {
-                          print(response)
+                        } else if (response == 'USER_DOES_NOT_EXIST') {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 4.0
+                                    ),
+                                    child: Icon(
+                                      Icons.warning_amber_rounded,
+                                      color: Colors.white
+                                    ),
+                                  ),
+                                  Text('The email is not registered.'),
+                                ]
+                              ),
+                              backgroundColor: Colors.redAccent,
+                            )
+                          )
+                        } else if (response == 'WRONG_PASSWORD') {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 4.0
+                                    ),
+                                    child: Icon(
+                                      Icons.warning_amber_rounded,
+                                      color: Colors.white
+                                    ),
+                                  ),
+                                  Text('The password is incorrect.'),
+                                ]
+                              ),
+                              backgroundColor: Colors.redAccent,
+                            )
+                          )
                         }
                       }
                     );

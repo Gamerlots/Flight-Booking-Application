@@ -27,7 +27,7 @@ def add_user():
     password = request.json["password"]
 
     document = database.users.find_one({"email": email})
-    if document == None:
+    if document is None:
         database.users.insert_one({"email": email, "password": password, "bookings": []})
         response.data = "SUCCESS"
         return response
@@ -49,7 +49,7 @@ def verify_user():
 
 
     document = database.users.find_one({"email": email})
-    if document == None:
+    if document is None:
         response.data = "USER_DOES_NOT_EXIST"
         return response
     
@@ -74,7 +74,7 @@ def add_booking():
     booking_information = request.json["bookingInformation"]
 
     document = database.users.find_one({"email": email})
-    if document == None:
+    if document is None:
         response.data = "USER_DOES_NOT_EXIST"
         return response
     
@@ -97,7 +97,7 @@ def get_bookings():
     email = request.json["email"]
 
     document = database.users.find_one({"email": email})
-    if document == None:
+    if document is None:
         response.data = "USER_DOES_NOT_EXIST"
         return response
 
