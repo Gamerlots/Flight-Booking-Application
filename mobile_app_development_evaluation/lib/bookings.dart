@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app_development_evaluation/bookings_information.dart';
-import 'package:mobile_app_development_evaluation/my_bookings.dart';
+import 'package:mobile_app_development_evaluation/booking_information.dart';
 
 class Bookings extends StatefulWidget {
   const Bookings({super.key});
@@ -10,28 +9,49 @@ class Bookings extends StatefulWidget {
 }
 
 class _BookingsState extends State<Bookings> {
+  TextEditingController search = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const MyBookings()
-                    )
-                  );
-                },
-                child: const Text('My Bookings')
+    return Container(
+      alignment: Alignment.center,
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Book Flight',
+                style: TextStyle(
+                  fontSize: 36.0,
+                  fontWeight: FontWeight.bold
+                )
               ),
-              const FlightsList(),
-            ]
-          ),
-        )
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: TextField(
+                controller: search,
+                decoration: const InputDecoration(
+                  hintText: "Search the world's flights...",
+                  prefixIcon: Icon(Icons.search),
+                  filled: true,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.indigo,
+                      width: 2.0
+                    )
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(style: BorderStyle.none)
+                  )
+                )
+              ),
+            ),
+            const FlightsList(),
+          ]
+        ),
       )
     );
   }

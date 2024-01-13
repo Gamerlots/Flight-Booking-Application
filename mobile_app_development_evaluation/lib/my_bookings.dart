@@ -40,6 +40,7 @@ class _MyBookingsState extends State<MyBookings> {
 
   @override
   void initState() {
+    super.initState();
     isLoading = true;
     getBookings().then(
       (response) => {
@@ -66,20 +67,20 @@ class _MyBookingsState extends State<MyBookings> {
       bookingCards.add(const CircularProgressIndicator());
     }
 
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
+    return Center(
       child: Column(
         children: <Widget>[
-            const Text(
-              'My Bookings',
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'My Flights',
               style: TextStyle(
                 fontSize: 36.0,
                 fontWeight: FontWeight.bold
               )
             ),
-          ] + bookingCards
-        )
+          )
+        ] + bookingCards
       )
     );
   }

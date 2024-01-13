@@ -91,7 +91,7 @@ class _BookingsInformationState extends State<BookingsInformation> {
                         decoration: const InputDecoration(
                           labelText: 'Departure date',
                           filled: true,
-                          prefixIcon: Icon(Icons.calendar_today),
+                          prefixIcon: Icon(Icons.flight_takeoff),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide.none
                           ),
@@ -117,7 +117,7 @@ class _BookingsInformationState extends State<BookingsInformation> {
                         decoration: const InputDecoration(
                           labelText: 'Return date',
                           filled: true,
-                          prefixIcon: Icon(Icons.calendar_today),
+                          prefixIcon: Icon(Icons.flight_land),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide.none
                           ),
@@ -148,7 +148,6 @@ class _BookingsInformationState extends State<BookingsInformation> {
                       passengerInputs.add(
                         PassengerInput(index: passengerInputs.length + 1)
                       );
-                      // numberOfPassengers++;
                     });
                   },
                   style: const ButtonStyle(
@@ -276,10 +275,8 @@ class _PassengerInputState extends State<PassengerInput> {
             },
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                width: 100,
+              Expanded(
                 child: TextFormField(
                   controller: widget.ageController,
                   decoration: const InputDecoration(

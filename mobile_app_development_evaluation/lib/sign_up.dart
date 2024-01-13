@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:mobile_app_development_evaluation/bookings.dart';
+import 'package:mobile_app_development_evaluation/main_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final _formKey = GlobalKey<FormState>();
@@ -166,7 +166,7 @@ class _SignUpState extends State<SignUp> {
                         ? Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (BuildContext context) => const Bookings()
+                              builder: (BuildContext context) => const MainPage()
                             )
                           )
                         : print('The user exists.')
