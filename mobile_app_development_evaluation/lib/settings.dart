@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:mobile_app_development_evaluation/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';

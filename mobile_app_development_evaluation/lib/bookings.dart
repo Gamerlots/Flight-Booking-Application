@@ -9,7 +9,7 @@ class Bookings extends StatefulWidget {
 }
 
 class _BookingsState extends State<Bookings> {
-  TextEditingController search = TextEditingController();
+  String searchFilter = '';
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class _BookingsState extends State<Bookings> {
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
         child: Column(
-          children: [
+          children: <Widget>[
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
@@ -30,26 +30,25 @@ class _BookingsState extends State<Bookings> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: TextField(
-                controller: search,
-                decoration: const InputDecoration(
-                  hintText: "Search the world's flights...",
-                  prefixIcon: Icon(Icons.search),
-                  filled: true,
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.indigo,
-                      width: 2.0
-                    )
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(style: BorderStyle.none)
-                  )
-                )
+              padding: const EdgeInsets.all(8.0),
+              child: SearchBar(
+                hintText: "Search the world's flights...",
+                leading: const Icon(Icons.search),
+                onChanged: (value) {
+                  setState(() {
+                    searchFilter = value;
+                  });
+                },
+                padding: const MaterialStatePropertyAll<EdgeInsetsGeometry>(
+                  EdgeInsets.symmetric(horizontal: 14.0)
+                ),
+                elevation: const MaterialStatePropertyAll<double>(3.0),
+                shadowColor: const MaterialStatePropertyAll<Color>(
+                  Colors.indigo
+                ),
               ),
             ),
-            const FlightsList(),
+            FlightsList(searchFilter: searchFilter),
           ]
         ),
       )
@@ -145,7 +144,9 @@ class FlightCard extends StatelessWidget {
 }
 
 class FlightsList extends StatefulWidget {
-  const FlightsList({super.key});
+  final String searchFilter;
+
+  const FlightsList({super.key, required this.searchFilter});
 
   @override
   State<FlightsList> createState() => _FlightsListState();
@@ -166,7 +167,15 @@ class _FlightsListState extends State<FlightsList> {
   Widget build(BuildContext context) {
     List<FlightCard> flightCards = [];
     for (final flight in flights) {
-      flightCards.add(FlightCard(flightInformation: flight));
+      bool isFiltered = true;
+      for (final value in flight.values) {
+        if (value.toLowerCase().contains(widget.searchFilter.toLowerCase())) {
+          isFiltered = false;
+        }
+      }
+      if (!isFiltered) {
+        flightCards.add(FlightCard(flightInformation: flight));
+      }
     }
     return Column(children: flightCards);
   }

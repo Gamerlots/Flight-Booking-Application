@@ -178,7 +178,25 @@ class _BookingsInformationState extends State<BookingsInformation> {
                                 )
                               )
                             } else {
-                              print('The booking did not upload...')
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 4.0
+                                        ),
+                                        child: Icon(
+                                          Icons.warning_amber_rounded,
+                                          color: Colors.white
+                                        ),
+                                      ),
+                                      Text('The booking did not upload successfully.'),
+                                    ]
+                                  ),
+                                  backgroundColor: Colors.redAccent,
+                                )
+                              )
                             }
                           }
                         );
@@ -257,7 +275,7 @@ class _PassengerInputState extends State<PassengerInput> {
           Text(
             'Passenger ${widget.index}',
             style: const TextStyle(
-              fontSize: 18.0,
+              fontSize: 20.0,
               fontWeight: FontWeight.bold
             )
           ),
@@ -304,9 +322,12 @@ class _PassengerInputState extends State<PassengerInput> {
                 label: const Text('Seat'),
                 controller: widget.seatController,
                 dropdownMenuEntries: const <DropdownMenuEntry>[
+                  DropdownMenuEntry(value: '36A', label: '36A'),
+                  DropdownMenuEntry(value: '36B', label: '36B'),
+                  DropdownMenuEntry(value: '36C', label: '36C'),
                   DropdownMenuEntry(value: '37A', label: '37A'),
                   DropdownMenuEntry(value: '37B', label: '37B'),
-                  DropdownMenuEntry(value: '37C', label: '37C')
+                  DropdownMenuEntry(value: '37C', label: '37C'),
                 ]
               )
             ]

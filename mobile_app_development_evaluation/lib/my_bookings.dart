@@ -68,19 +68,21 @@ class _MyBookingsState extends State<MyBookings> {
     }
 
     return Center(
-      child: Column(
-        children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'My Flights',
-              style: TextStyle(
-                fontSize: 36.0,
-                fontWeight: FontWeight.bold
-              )
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'My Flights',
+                style: TextStyle(
+                  fontSize: 36.0,
+                  fontWeight: FontWeight.bold
+                )
+              ),
             ),
-          )
-        ] + bookingCards
+          ] + bookingCards
+        ),
       )
     );
   }
